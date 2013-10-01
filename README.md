@@ -2,11 +2,11 @@
 
 ## 起動方法
 
-1. vmの立ち上げ
+### vmの立ち上げ
 ```
 $ ./setup_vms.rb	
 ``` 
-2. hostの設定
+### hostの設定
 ```
 $ vi etc/hosts
 
