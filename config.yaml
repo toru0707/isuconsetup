@@ -15,3 +15,4 @@ chef_home: ../../chefrepo
 # for capistrano
 git_host: github.com
 deploy_to_host: 
+

@@ -1,0 +1,20 @@
+127.0.0.1 localhost	sdbs.ecia.cumulo.jp
+
+# The following lines are desirable for IPv6 capable hosts
+::1 ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+ff02::3 ip6-allhosts
+
+# mvp hosts
+54.250.201.38 cumulo.jp
+54.250.204.55 virgo.sr.com
+54.250.204.55 taurus.sr.com
+54.250.223.74 da.cumulo.jp 
+54.250.207.185 rp.cumulo.jp
+54.250.207.207 scud.cumulo.jp
+54.250.227.239 oroshi.com
+54.250.231.154 gemini.srfactory.com
+54.250.227.178 wfs.cumulo.jp 
