@@ -1,0 +1,51 @@
+{
+  "sources": {
+    "mysql": {
+      "locked_version": "3.0.2"
+    },
+    "database": {
+      "locked_version": "1.4.0"
+    },
+    "java": {
+      "locked_version": "1.12.0"
+    },
+    "mongodb": {
+      "locked_version": "0.11.0"
+    },
+    "tomcat": {
+      "locked_version": "0.14.2"
+    },
+    "r": {
+      "locked_version": "0.3.0",
+      "git": "git://github.com/stevendanna/cookbook-r.git",
+      "ref": "aa96e45874cb12efe1488e639006da124a9cb50b"
+    },
+    "openssl": {
+      "locked_version": "1.1.0"
+    },
+    "build-essential": {
+      "locked_version": "1.4.2"
+    },
+    "postgresql": {
+      "locked_version": "3.0.4"
+    },
+    "apt": {
+      "locked_version": "2.1.1"
+    },
+    "aws": {
+      "locked_version": "0.101.4"
+    },
+    "xfs": {
+      "locked_version": "1.1.0"
+    },
+    "windows": {
+      "locked_version": "1.10.0"
+    },
+    "chef_handler": {
+      "locked_version": "1.1.4"
+    },
+    "ark": {
+      "locked_version": "0.3.2"
+    }
+  }
+}

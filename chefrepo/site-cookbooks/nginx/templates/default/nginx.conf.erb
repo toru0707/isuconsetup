@@ -1,0 +1,157 @@
+user www-data;
+worker_processes 1;
+pid /run/nginx.pid;
+
+events {
+  worker_connections 768;
+# multi_accept on;
+}
+
+http {
+
+##
+# Basic Settings
+##
+
+  sendfile on;
+  tcp_nopush on;
+  tcp_nodelay on;
+  keepalive_timeout 65;
+  types_hash_max_size 2048;
+# server_tokens off;
+
+# server_names_hash_bucket_size 64;
+# server_name_in_redirect off;
+
+  include /etc/nginx/mime.types;
+  default_type application/octet-stream;
+
+##
+# Logging Settings
+##
+
+  access_log /var/log/nginx/access.log;
+  error_log /var/log/nginx/error.log;
+
+##
+# Gzip Settings
+##
+
+  gzip on;
+  gzip_disable "msie6";
+# gzip_vary on;
+# gzip_proxied any;
+# gzip_comp_level 6;
+# gzip_buffers 16 8k;
+# gzip_http_version 1.1;
+# gzip_types text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript;
+
+##
+# nginx-naxsi config
+##
+# Uncomment it if you installed nginx-naxsi
+##
+
+#include /etc/nginx/naxsi_core.rules;
+
+##
+# nginx-passenger config
+##
+# Uncomment it if you installed nginx-passenger
+##
+
+#passenger_root /usr;
+#passenger_ruby /usr/bin/ruby;
+
+##
+# Virtual Host Configs
+##
+
+  include /etc/nginx/conf.d/*.conf;
+  include /etc/nginx/sites-enabled/*;
+
+  server {
+#listen 80 default_server;
+#listen [::]:80 default_server ipv6only=on;
+    listen 443;
+
+    ssl on;
+    ssl_certificate /opt/nginx/conf/cumulo.crt;
+    ssl_certificate_key /opt/nginx/conf/cumulo.key;
+
+#root /usr/share/nginx/html;
+    index index.html index.htm;
+
+# Make site accessible from http://localhost/
+    server_name console.cumulo.jp;
+
+
+    location /analysis {
+      client_max_body_size 100M;
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_set_header Host $http_host;
+      proxy_set_header X-Forwarded-Proto https;
+      proxy_connect_timeout      240;
+      proxy_send_timeout         240;
+      proxy_read_timeout         240;
+      proxy_pass http://da.cumulo.jp:3000/analysis/;
+    }
+
+    location /opendata-analysis {
+      client_max_body_size 100M;
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_set_header Host $http_host;
+      proxy_set_header X-Forwarded-Proto https;
+      proxy_connect_timeout      240;
+      proxy_send_timeout         240;
+      proxy_read_timeout         240;
+      proxy_redirect http:// https://;
+      proxy_pass http://cumulo.jp:3001/opendata-analysis/;
+    }
+    location /scud{
+      client_max_body_size 100M;
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_set_header Host $http_host;
+      proxy_set_header X-Forwarded-Proto https;
+      proxy_connect_timeout      240;
+      proxy_send_timeout         240;
+      proxy_read_timeout         240;
+      proxy_redirect http:// https://;
+      proxy_pass http://cumulo.jp:8080/scud/;
+    }
+
+    location /sdbs/{
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_set_header Host $http_host;
+      proxy_set_header X-Forwarded-Proto https;
+      proxy_connect_timeout      240;
+      proxy_send_timeout         240;
+      proxy_read_timeout         240;
+      proxy_redirect http:// https://;
+      proxy_pass http://cumulo.jp:8080/sdbs-webconsole/;
+    }
+
+    location /wfs{
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_set_header Host $http_host;
+      proxy_set_header X-Forwarded-Proto https;
+      proxy_connect_timeout      240;
+      proxy_send_timeout         240;
+      proxy_read_timeout         240;
+      proxy_redirect http:// https://;
+      proxy_pass http://wfs.cumulo.jp:3000/wfs/;
+    }
+
+    location /{
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_set_header Host $http_host;
+      proxy_set_header X-Forwarded-Proto https;
+      proxy_connect_timeout      240;
+      proxy_send_timeout         240;
+      proxy_read_timeout         240;
+      proxy_redirect http:// https://;
+      proxy_pass http://cumulo.jp:8080/console-main/;
+    }
+  }
+}
+

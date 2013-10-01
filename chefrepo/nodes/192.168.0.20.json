@@ -1,0 +1,34 @@
+{
+  "java" : {
+    "install_flavor" : "oracle",
+    "jdk_version" : "7",
+    "accept_license_agreement" : true,
+    "oracle" : {
+      "accept_oracle_download_terms" : true
+    }
+  },
+  "mysql" : {
+    "server_debian_password" : "",
+    "server_root_password" : "",
+    "server_repl_password" : ""
+  },
+  "tomcat" : {
+    "base_version" : 7
+  },
+  "postfix" : {
+    "myhostname" : "cumulo.jp",
+    "mydestination" : "cumulo.jp, locahost"
+  },
+  "run_list":[
+    "git",
+  "nginx",
+  "tomcat",
+  "java",
+  "recipe[mongodb::10gen_repo]",
+  "recipe[mongodb]",
+  "vsftpd",
+  "recipe[mysql::server]",
+  "postfix",
+  "r"
+    ]
+}

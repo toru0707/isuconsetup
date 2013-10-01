@@ -1,0 +1,9 @@
+# coding: utf-8
+
+site :opscode
+cookbook 'mysql'
+cookbook 'database'
+cookbook 'java'
+#cookbook 'mongodb', git:'git://github.com/edelight/chef-mongodb.git'
+#cookbook 'tomcat'
+cookbook 'r', git:'git://github.com/stevendanna/cookbook-r.git'
