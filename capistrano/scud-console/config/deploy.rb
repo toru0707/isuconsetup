@@ -4,16 +4,13 @@ require "find"
 set :deploy_to_host, "#{mvphosts['cumulo_host']}"
 
 # app settings
-set :application, "scudconsole"
-set :war_base, "scud"
-set :repository,  "git@#{git_host}:#{application}.git"
+set :application, "isucon-node"
+set :repository,  "https://#{git_host}/toru0707/#{application}.git"
 set :scm, :git
 set :branch, "master"
 set :deploy_to, "/opt/#{application}"
 set :deploy_via, :copy
-set :tomcat_home, "/var/lib/tomcat7"
-set :tomcat_webapps, "#{tomcat_home}/webapps"
-set :build_script, "mvn clean package -Dmaven.test.skip=true"
+set :build_script, "npm install"
 
 role :web, "#{deploy_to_host}"                          
 role :app, "#{deploy_to_host}"                          
@@ -33,28 +30,21 @@ end
 
 namespace :deploy do
   before "deploy" do
-    try_sudo "chown -R cumulo:cumulo #{deploy_to}"
+    try_sudo "chown -R isucon:isucon #{deploy_to}"
   end
 
   task :start do 
-        try_sudo "service tomcat7 start"
+      try_sudo "node start"
   end
   task :stop do 
-	try_sudo "service tomcat7 stop"
+      try_sudo "node stop"
   end
   task :restart,  :except => { :no_release => true } do
-	try_sudo "service tomcat7 restart"
-  end
-end
-
-after "before:update_code" do
-  Find.find "." do |file|
-    puts file
+      try_sudo "node stop"
+      try_sudo "node start"
   end
 end
 
 after "deploy:update" do
-  try_sudo "rm -fr #{tomcat_webapps}/#{war_base}.war"
-  try_sudo "rm -fr #{tomcat_webapps}/#{war_base}"
-  try_sudo "ln -s #{current_path}/target/#{application}.war #{tomcat_webapps}/#{war_base}.war"
+  #try_sudo "rm -fr #{tomcat_webapps}/#{war_base}.war"
 end
