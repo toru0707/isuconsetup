@@ -1,7 +1,7 @@
 require "capistrano_colors"
 require "find"
 
-set :deploy_to_host, "#{mvphosts['cumulo_host']}"
+set :deploy_to_host, "#{deploy_to_host}"
 
 # app settings
 set :application, "isucon-node"
@@ -43,8 +43,4 @@ namespace :deploy do
       try_sudo "node stop"
       try_sudo "node start"
   end
-end
-
-after "deploy:update" do
-  #try_sudo "rm -fr #{tomcat_webapps}/#{war_base}.war"
 end
