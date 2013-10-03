@@ -1,14 +1,14 @@
 # global
-ssh_private_key_path: ../../key/iam2.pem
+ssh_private_key_path: ../../key/
 
 # for vagrant
-ssh_keypair_name: iam2 
+ssh_keypair_name:  
 ssh_username: isucon 
-access_key_id: AKIAJNRC4UZDVQJZZGBQ
-secret_access_key: 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
+access_key_id: 
+secret_access_key: 
 instance_type: m1.micro
 region: ap-northeast-1
-ami: ami-0541d304
+ami: 
 add_host_sh_path: ../etc/add_user.sh
 chef_home: ../../chefrepo
 
