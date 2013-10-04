@@ -1,5 +1,6 @@
 cd
 
+echo test
 ## vim
 #sudo yum -y install vim
 
