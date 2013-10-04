@@ -2,20 +2,20 @@
 sudo yum -y install vim
 
 # tmux
- install deps
- sudo yum -y install gcc kernel-devel make ncurses-devel
- tar xzvf libevent-2.0.21-stable.tar.gz
- cd libevent-2.0.21-stable
- ./configure --prefix=/usr/local
- sudo make 
- sudo make install
- cd 
- tar xzvf tmux-1.8.tar.gz
- cd tmux-1.8
- LDFLAGS="-L/usr/local/lib -Wl,-rpath=/usr/local/lib" ./configure --prefix=/usr/local
- sudo make 
- sudo make install
- cd 
+install deps
+sudo yum -y install gcc kernel-devel make ncurses-devel
+tar xzvf libevent-2.0.21-stable.tar.gz
+cd libevent-2.0.21-stable
+./configure --prefix=/usr/local
+sudo make 
+sudo make install
+cd .. 
+tar xzvf tmux-1.8.tar.gz
+cd tmux-1.8
+LDFLAGS="-L/usr/local/lib -Wl,-rpath=/usr/local/lib" ./configure --prefix=/usr/local
+sudo make 
+sudo make install
+cd .. 
 
 # mysql5.7.2
 wget -O /tmp/mysql5.7.2.tar http://dev.mysql.com/get/Downloads/MySQL-5.7/MySQL-5.7.2-m12-1.linux_glibc2.5.x86_64.rpm-bundle.tar/from/http://cdn.mysql.com/
