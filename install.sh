@@ -2,7 +2,6 @@
 sudo yum -y install vim
 
 # tmux
-install deps
 sudo yum -y install gcc kernel-devel make ncurses-devel
 tar xzvf libevent-2.0.21-stable.tar.gz
 cd libevent-2.0.21-stable
@@ -39,10 +38,26 @@ cd memcached-1.4.15
 ./configure
 sudo make
 sudo make install
+cd ..
 
 # telnet
 sudo yum -y install telnet
 
 # node 11.4
-cd 
 git clone https://github.com/joyent/node.git
+cd node
+git checkout v0.11.7
+./configure
+make 
+sudo make install
+curl https://npmjs.org/install.sh | sudo sh
+cd ..
+
+# nginx 1.5.6
+wget http://nginx.org/download/nginx-1.5.6.tar.gz
+tar xzvf nginx-1.5.6.tar.gz
+cd nginx-1.5.6
+./configure --with-http_gzip_static_module
+make
+sudo make install
+cd ..
