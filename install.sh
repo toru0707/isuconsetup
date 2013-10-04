@@ -1,5 +1,3 @@
-cd
-
 # vim
 sudo yum -y install vim
 
